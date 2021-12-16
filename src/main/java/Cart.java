@@ -61,6 +61,14 @@ public class Cart {
         itemList.add(item);
     }
 
+    public void applyDiscount(String discountCode, double percentage) {
+        Discount discount = new Discount();
+        discount.discountCode = discountCode;
+        discount.percentage = percentage;
+        discount.expirationDate = "11/22";
+        discountList.add(discount);
+    }
+
     public Item getItemByID(int ID)  {
         for (Item item : itemList) {
             if (item.itemID == ID) {

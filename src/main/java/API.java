@@ -18,7 +18,6 @@ public class API {
             e.printStackTrace();
         }
         sc.useDelimiter(",");
-        sc.nextLine();
         while (sc.hasNext()) {
             String val = sc.nextLine();
             array.add(val.split(","));
@@ -36,12 +35,16 @@ public class API {
         updateFile(cart);
     }
 
-    public void sendApplyDiscountRequest(int cartID, String discountCode) {
-
+    public void sendApplyDiscountRequest(int cartID, String discountCode, double percentage) {
+        Cart cart = createCart(cartID);
+        cart.applyDiscount(discountCode, percentage);
+        updateFile(cart);
     }
 
     public void sendModifyQuantityRequest(int cartID, int itemID, int newQuantity) {
-
+        Cart cart = createCart(cartID);
+        cart.itemQuantityMap.put(itemID, newQuantity);
+        updateFile(cart);
     }
 
     private Cart createCart(int cartID) {
@@ -137,6 +140,7 @@ public class API {
         address = cart.address;
         String[] newLine = {cartID, itemListAsString, itemQuantityAsString, itemStockAsString, itemPricesAsString, discountsAsString,
         discountPercentageAsString, discountExpirationAsString, address};
+        array.remove(cart.cartID - 1);
         array.add(cart.cartID - 1, newLine);
         try {
             outputToCSV();
@@ -144,5 +148,4 @@ public class API {
             e.printStackTrace();
         }
     }
-
 }
