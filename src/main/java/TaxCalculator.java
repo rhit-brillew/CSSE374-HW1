@@ -1,30 +1,39 @@
 public class TaxCalculator {
 
-    public static double calculateBasedOnLocation(String state) {
+    public static double calculateBasedOnLocation(String state, double totalItemCost) {
+        double taxRate = 0;
         switch (state) {
             case "California":
-                return 0.0725;
+                taxRate = 0.0725;
+                break;
             case "Tennessee":
             case "Rhode Island":
             case "Mississippi":
             case "Indiana":
-                return 0.0700;
+                taxRate = 0.0700;
+                break;
             case "Minnesota":
-                return 0.0688;
+                taxRate = 0.0688;
+                break;
             case "Nevada":
-                return 0.0685;
+                taxRate = 0.0685;
+                break;
             case "New Jersey":
-                return 0.0663;
+                taxRate = 0.0663;
+                break;
             case "Washington":
             case "Arkansas":
             case "Kansas":
-                return 0.0650;
+                taxRate = 0.0650;
+                break;
             case "Connecticut":
-                return 0.0635;
+                taxRate = 0.0635;
+                break;
             case "Texas":
             case "Massachusetts":
             case "Illinois":
-                return 0.0625;
+                taxRate = 0.0625;
+                break;
             case "West Virginia":
             case "Vermont":
             case "South Carolina":
@@ -35,46 +44,59 @@ public class TaxCalculator {
             case "Iowa":
             case "Idaho":
             case "Florida":
-                return 0.0600;
+                taxRate = 0.0600;
+                break;
             case "Utah":
-                return 0.0595;
+                taxRate = 0.0595;
+                break;
             case "Ohio":
-                return 0.0575;
+                taxRate = 0.0575;
+                break;
             case "Arizona":
             case "Maine":
-                return 0.0550;
+                taxRate = .0550;
+                break;
             case "Virginia":
-                return 0.0530;
+                taxRate = 0.0530;
+                break;
             case "New Mexico":
-                return 0.0513;
+                taxRate = 0.0513;
+                break;
             case "Wisconsin":
             case "North Dakota":
-                return 0.0500;
+                taxRate = 0.0500;
+                break;
             case "North Carolina":
-                return 0.0475;
+                taxRate = 0.0475;
+                break;
             case "South Dakota":
             case "Oklahoma":
-                return 0.0450;
+                taxRate = 0.0450;
+                break;
             case "Louisiana":
-                return 0.0445;
+                taxRate = 0.0445;
+                break;
             case "Missouri":
-                return 0.0423;
+                taxRate = 0.0423;
+                break;
             case "Wyoming":
             case "New York":
             case "Hawaii":
             case "Georgia":
             case "Alabama":
-                return 0.0400;
+                taxRate = 0.0400;
+                break;
             case "Colorado":
-                return 0.0290;
+                taxRate = 0.0290;
+                break;
             case "Oregon":
             case "New Hampshire":
             case "Montana":
             case "Delaware":
             case "Alaska":
-                return 0.000;
+                taxRate = 0.000;
         }
-        return 0;
+        return totalItemCost * taxRate;
     }
 
 }
