@@ -61,11 +61,11 @@ public class Cart {
         itemList.add(item);
     }
 
-    public void applyDiscount(String discountCode, double percentage) {
+    public void applyDiscount(String discountCode, double percentage, String expirationDate) {
         Discount discount = new Discount();
         discount.discountCode = discountCode;
         discount.percentage = percentage;
-        discount.expirationDate = "11/22";
+        discount.expirationDate = expirationDate;
         discountList.add(discount);
     }
 
@@ -75,23 +75,6 @@ public class Cart {
                 return item;
             }
         }
-        Item invalidItem = new Item();
-        invalidItem.itemID = -1;
-        invalidItem.numberInStock = -1;
-        invalidItem.price = -1;
-        return invalidItem;
-    }
-
-    public Discount getDiscountCode(String discountCode) {
-        for(Discount discount: discountList) {
-            if (discount.discountCode.equals(discountCode)) {
-                return discount;
-            }
-        }
-        Discount invalidDiscount = new Discount();
-        invalidDiscount.discountCode = "Invalid discount code";
-        invalidDiscount.percentage = -1;
-        invalidDiscount.expirationDate = "-1";
-        return invalidDiscount;
+        return null;
     }
 }

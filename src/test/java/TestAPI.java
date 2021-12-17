@@ -10,7 +10,7 @@ public class TestAPI {
 
         api.sendAddItemRequest(4, 1, 3.99);
 
-        api.sendApplyDiscountRequest(4, "CODE1", .05);
+        api.sendApplyDiscountRequest(4, "CODE1", .05, "11/22");
 
         api.sendModifyQuantityRequest(4, 1, 3);
         api.sendModifyQuantityRequest(4, 1, 1);
