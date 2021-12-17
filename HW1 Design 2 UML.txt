@@ -1,0 +1,44 @@
+@startuml
+class API {
+sendViewRequest(int)
+sendAddItemRequest(int, int)
+sendApplyDiscountRequest(int, String)
+sendModifyQuantityRequest(int, int, int)
+}
+
+class Cart {
+ID: int
+totalCost: double
+address: String
+itemQuantityMap: Map<int, int>
+
+computeTotalCost(): double
+computeTotalDiscount(): double
+computeTaxes(address: String, totalCost: double)
+getItemByID(int): Item
+}
+
+class Item {
+ID: int
+price: double
+numberInStock: int
+}
+
+class Discount {
+code: String
+percentage: double
+expirationDate: String
+}
+
+
+class TaxCalculator {
+
+calculateBasedOnLocation(): double
+}
+
+
+Cart -> "*" Item
+Cart -> "*" Discount
+Cart -> TaxCalculator
+API ..> Cart
+@enduml

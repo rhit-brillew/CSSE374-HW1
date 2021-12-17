@@ -12,18 +12,20 @@ import java.util.stream.Stream;
 public class API {
     FileIOHandler fileIOHandler = new FileIOHandler();
 
-    public void sendViewRequest(int cartID) {
+    public Cart sendViewRequest(int cartID) {
         Cart cart = fileIOHandler.createCart(cartID);
         cart.computeTotalCost();
+        return cart;
     }
 
-    public void sendAddItemRequest(int cartID, int itemID, double price) {
+    public Cart sendAddItemRequest(int cartID, int itemID, double price) {
         Cart cart = fileIOHandler.createCart(cartID);
         cart.addItem(itemID, price);
         fileIOHandler.updateFile(cart);
+        return cart;
     }
 
-    public void sendApplyDiscountRequest(int cartID, String discountCode, double percentage, String expirationDate) {
+    public Cart sendApplyDiscountRequest(int cartID, String discountCode, double percentage, String expirationDate) {
         Cart cart = fileIOHandler.createCart(cartID);
         String dateString = new SimpleDateFormat("MM/yy").format(new Date());
         String[] dateStringAsArray = dateString.split("/");
@@ -31,24 +33,26 @@ public class API {
         if (Integer.parseInt(dateStringAsArray[1]) >= Integer.parseInt(expirationAsArray[1])) {
             if (Integer.parseInt(dateStringAsArray[0]) >= Integer.parseInt(expirationAsArray[0])) {
                 cart.invalidCodes++;
-                return;
+                return cart;
             }
         }
         if (cart.invalidCodes >= 5) {
-            return;
+            return cart;
         }
         cart.applyDiscount(discountCode, percentage, expirationDate);
         fileIOHandler.updateFile(cart);
+        return cart;
     }
 
-    public void sendModifyQuantityRequest(int cartID, int itemID, int newQuantity) {
+    public Cart sendModifyQuantityRequest(int cartID, int itemID, int newQuantity) {
         Cart cart = fileIOHandler.createCart(cartID);
         if (newQuantity <= 0) {
-            return;
+            return cart;
         } else if (newQuantity > cart.getItemByID(itemID).numberInStock) {
-            return;
+            return cart;
         }
         cart.itemQuantityMap.put(itemID, newQuantity);
         fileIOHandler.updateFile(cart);
+        return cart;
     }
 }

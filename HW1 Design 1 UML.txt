@@ -1,0 +1,44 @@
+@startuml
+class API {
+sendRequest()
+recieveResponse()
+}
+
+class Cart {
+ID: int
+contents: List<Item>
+totalCost: double
+totalTaxes: double
+address: String
+
+computeTotalCost(): double
+computeTotalDiscount(): double
+computeTaxes(address: String, totalCost: double)
+}
+
+class Item {
+ID: int
+price: double
+quantity: int
+amountInStock: int
+}
+
+class Discount {
+code: String
+percentage: double
+}
+
+
+class TaxCalculator {
+address: String
+cost: double
+
+calculateBasedOnLocation(): double
+}
+
+Cart -> "*" Item
+Cart -> "*" Discount
+Discount -> "*" Item
+Cart -> TaxCalculator
+API -> "*" Cart
+@enduml

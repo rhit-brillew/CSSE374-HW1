@@ -32,7 +32,7 @@ public class Cart {
         return totalCost;
     }
 
-    private double computeTotalItemCost() {
+    double computeTotalItemCost() {
         double itemCost = 0;
         for (int i = 0; i < itemList.size(); i++) {
             itemCost += itemList.get(i).price;
@@ -40,7 +40,7 @@ public class Cart {
         return itemCost;
     }
 
-    private double computeTotalDiscount() {
+    double computeTotalDiscount() {
         double discountTotal = 0;
         for (int i = 0; i < discountList.size(); i++) {
             discountTotal += discountList.get(i).percentage * totalItemCost;
